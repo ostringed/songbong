@@ -74,7 +74,8 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 			// Create new Song object
 			var song = new Songs ({
 				name: this.name,
-                link: this.link
+                link: this.link,
+				score:50
 			});
 
 			// Redirect after save
@@ -110,16 +111,16 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
                 }
             };
 
-            // Update existing Song
-            $scope.update = function() {
-                var song = $scope.song;
+		// Update existing Song
+		$scope.update = function() {
+			var song = $scope.song;
 
-                song.$update(function() {
-                    $location.path('songs/' + song._id);
-                }, function(errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
-            };
+			song.$update(function() {
+				//$location.path('songs/' + song._id);
+			}, function(errorResponse) {
+				$scope.error = errorResponse.data.message;
+			});
+		};
 
             // Find a list of Songs
             $scope.find = function() {
@@ -158,6 +159,10 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
                 },300);
                 return debounceFn;
             }
+		$scope.ratingChanged=function(song){
+			$scope.song=song
+			$scope.update()
+		}
 
         }
     ]);

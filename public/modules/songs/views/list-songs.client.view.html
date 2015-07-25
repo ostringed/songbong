@@ -55,8 +55,8 @@
 
                             </div>
 							<div layout="column" flex="20">
-								<md-slider flex class="md-warn" md-discrete
-										   ng-model="song.rating" step="1" min="1" max="100" aria-label="rating">
+								<md-slider ng-change="ratingChanged(song)" flex class="md-warn" md-discrete
+										   ng-model="song.score" step="1" min="1" max="100" aria-label="rating">
 								</md-slider>
 							</div>
 						</div>

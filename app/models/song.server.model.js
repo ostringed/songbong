@@ -22,6 +22,12 @@ var SongSchema = new Schema({
         required: 'Please fill Song URL/Link',
         trim: true
     },
+	score: {
+        type: Number,
+        default: '',
+        required: 'Please fill Song URL/Link',
+        trim: true
+    },
 	created: {
 		type: Date,
 		default: Date.now
