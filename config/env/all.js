@@ -52,9 +52,16 @@ module.exports = {
 				'public/lib/angular-animate/angular-animate.js',
 				'public/lib/angular-ui-router/release/angular-ui-router.js',
 				'public/lib/angular-ui-utils/ui-utils.js',
+				'public/lib/angular-material/angular-material.js',
 
-				'public/lib/angular-material/angular-material.js'
-			]
+                'public/lib/angular-sanitize/angular-sanitize.min.js',
+                'public/lib/videogular/videogular.js',
+                'public/lib/videogular-controls/vg-controls.js',
+                'public/lib/videogular-overlay-play/vg-overlay-play.js',
+                'public/lib/videogular-poster/vg-poster.js',
+                'public/lib/videogular-buffering/vg-buffering.js'
+
+            ]
 		},
 		css: [
 			'public/modules/**/css/*.css'
