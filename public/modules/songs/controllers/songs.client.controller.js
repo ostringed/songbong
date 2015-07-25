@@ -1,39 +1,38 @@
 'use strict';
 
 // Songs controller
-angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce', '$mdSidenav', '$mdUtil',
-        function($scope, $stateParams, $location, Authentication, Songs, $sce, $mdSidenav, $mdUtil) {
+angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil',
+	function($scope, $stateParams, $location, Authentication, Songs, $sce,$mdSidenav,$mdUtil) {
+		$scope.authentication = Authentication;
 
+        this.config = {
+            sources: [
+                {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/audios/videogular.mp3"), type: "audio/mpeg"},
+                {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/audios/videogular.ogg"), type: "audio/ogg"}
+            ],
+            theme: {
+                url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+            }
+        };
 
-            this.config = {
-                sources: [
-                    {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/audios/videogular.mp3"), type: "audio/mpeg"},
-                    {src: $sce.trustAsResourceUrl("http://static.videogular.com/assets/audios/videogular.ogg"), type: "audio/ogg"}
-                ],
-                theme: {
-                    url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
-                }
-            };
+		// Create new Song
+		$scope.create = function() {
+			// Create new Song object
+			var song = new Songs ({
+				name: this.name,
+                link: this.link
+			});
 
-            $scope.authentication = Authentication;
+			// Redirect after save
+			song.$save(function(response) {
+				if($scope.songs && $scope.songs.length>0){
+					$scope.songs.push(song)
+				}else{
+					$scope.songs=[song]
+				}
+				$scope.close()
 
-            // Create new Song
-            $scope.create = function() {
-                // Create new Song object
-                var song = new Songs ({
-                    name: this.name,
-                    link: this.link
-                });
-
-                // Redirect after save
-                song.$save(function(response) {
-                    if($scope.songs && $scope.songs.length>0){
-                        $scope.songs.push(song)
-                    }else{
-                        $scope.songs=[song]
-                    }
-
-                    // Clear form fields
+				// Clear form fields
 //				$scope.name = '';
                 }, function(errorResponse) {
                     $scope.error = errorResponse.data.message;
