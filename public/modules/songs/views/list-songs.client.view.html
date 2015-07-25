@@ -1,4 +1,4 @@
-<div  style="padding-left: 40px;padding-right: 40px;">
+<div>
 	<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
 		<md-toolbar class="md-theme-light">
 			<h1 class="md-toolbar-tools">Add Song</h1>
@@ -27,13 +27,13 @@
 	</md-sidenav>
 	<div>
 		<md-content class="md-default-theme" ng-click="toggleRight()" data-ng-init="find()">
-			<md-list style="width: 100%">
-				<md-list-item class="md-3-line"  style="padding: 10px 0px;"  ng-repeat="song in songs">
+			<md-list>
+				<md-list-item class="md-3-line"   ng-repeat="song in songs">
 
-					<div class="md-list-item-text">
+					<div style="padding-left: 40px;padding-right: 40px;" class="md-list-item-text">
 						<h3>{{song.name}}</h3>
 						<p>{{song.link}}</p>
-						<md-slider style="padding-left: 20px;padding-right:20px;" flex class="md-warn" md-discrete ng-model="song.rating" step="1" min="1" max="100" aria-label="rating">
+						<md-slider flex class="md-warn" md-discrete ng-model="song.rating" step="1" min="1" max="100" aria-label="rating">
 						</md-slider>
 					</div>
 					<md-divider></md-divider>

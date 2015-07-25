@@ -20,6 +20,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 				}else{
 					$scope.songs=[song]
 				}
+				$scope.close()
 
 				// Clear form fields
 //				$scope.name = '';
