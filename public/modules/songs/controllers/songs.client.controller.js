@@ -23,16 +23,18 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
         controller.onPlayerReady = function(API) {
             controller.API = API;
+			controller.config.sources = controller.videos[0].sources;
+			$timeout(controller.API.play.bind(controller.API), 100);
         };
 
         controller.onCompleteVideo = function() {
             console.log('controller.videos.sources : ' + controller.videos.sources);
             controller.isCompleted = true;
-
+			$scope.songs[controller.currentVideo].isPlaying=false
             controller.currentVideo++;
 
             if (controller.currentVideo >= controller.videos.length) controller.currentVideo = 0;
-
+			$scope.songs[controller.currentVideo].isPlaying=true
             controller.setVideo(controller.currentVideo);
         };
 
@@ -136,11 +138,11 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
                 data.forEach(function(song){
 
-                    console.log('song: ' + song.url);
+                    console.log('song: ' + song.link);
                     controller.videos.push(
                         {
                             sources: [
-                                {src: $sce.trustAsResourceUrl(song.url), type: "audio/mpeg"}
+                                {src: $sce.trustAsResourceUrl(song.link), type: "audio/mpeg"}
                             ]
                         }
                     )
@@ -148,7 +150,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
                     console.log('controller.videos : ' + controller.videos);
 
                 });
-
+				$scope.songs[0].isPlaying=true
                 controller.config = {
                     preload: "none",
                     autoHide: false,

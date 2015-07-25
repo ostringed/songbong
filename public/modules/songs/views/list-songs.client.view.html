@@ -27,8 +27,27 @@
 	</md-sidenav>
 
 
-	<div>
-		<md-content class="md-default-theme" data-ng-init="find()">
+	<div data-ng-init="find()">
+		<div class="videogular-container" ng-if="controller.config.sources">
+			<videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
+				<vg-media vg-src="controller.config.sources"
+						  vg-tracks="controller.config.tracks"  vg-type="audio">
+				</vg-media>
+
+				<vg-controls>
+					<vg-play-pause-button></vg-play-pause-button>
+
+					<!--<vg-volume>-->
+					<!--<vg-mute-button></vg-mute-button>-->
+					<!--&lt;!&ndash;<vg-volume-bar></vg-volume-bar>&ndash;&gt;-->
+					<!--</vg-volume>-->
+				</vg-controls>
+				<!--<vg-overlay-play></vg-overlay-play>-->
+				<!--<vg-buffering></vg-buffering>-->
+				<!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
+			</videogular>
+		</div>
+		<md-content class="md-default-theme">
 			<md-list>
 				<md-list-item class="md-3-line" ng-repeat="song in songs | orderBy :'-score' track by $index">
 
@@ -38,25 +57,7 @@
 						<div layout="row">
 							<div layout="column" flex="5">
 
-								<div class="videogular-container" ng-if="$index == 0">
-									<videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
-										<vg-media vg-src="controller.config.sources"
-												  vg-tracks="controller.config.tracks"  vg-type="audio">
-										</vg-media>
-
-										<vg-controls>
-											<vg-play-pause-button></vg-play-pause-button>
-
-											<!--<vg-volume>-->
-											<!--<vg-mute-button></vg-mute-button>-->
-											<!--&lt;!&ndash;<vg-volume-bar></vg-volume-bar>&ndash;&gt;-->
-											<!--</vg-volume>-->
-										</vg-controls>
-										<!--<vg-overlay-play></vg-overlay-play>-->
-										<!--<vg-buffering></vg-buffering>-->
-										<!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
-									</videogular>
-								</div>
+								<img ng-if="song.isPlaying" height="40" width="40" src="http://1.bp.blogspot.com/-mYhbHUS89ao/T4Llt9Od-6I/AAAAAAAAAJ4/5XlWs9_yYaI/s320/icon-play.png">
 
 							</div>
 							<div layout="column" flex="30" style="padding-left: 20px;">
