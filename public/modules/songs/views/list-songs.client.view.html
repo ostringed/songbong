@@ -28,18 +28,32 @@
 	<div>
 		<md-content class="md-default-theme" ng-click="toggleRight()" data-ng-init="find()">
 			<md-list>
-				<md-list-item class="md-3-line" ng-repeat="song in songs">
+				<md-list-item class="md-3-line" ng-repeat="song in songs track by $index">
 
 					<div style="padding-left: 40px;padding-right: 40px;" class="md-list-item-text">
 						<h3>{{song.name}}</h3>
 						<p>{{song.link}}</p>
 
 						<div layout="row">
-							<div flex="79">
-								<audio controls>
-									<source src="http://w3schools.com/html/horse.mp3" type="audio/mpeg">
-								</audio>
-							</div>
+                            <div layout="column" flex="79">
+
+                                <videogular ng-if="$index == 0" vg-theme="controller.config.theme.url" class="videogular-container audio">
+                                    <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
+
+                                    <vg-controls>
+                                        <vg-play-pause-button></vg-play-pause-button>
+                                        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                                        <vg-scrub-bar>
+                                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                        </vg-scrub-bar>
+                                        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                                        <vg-volume>
+                                            <vg-mute-button></vg-mute-button>
+                                        </vg-volume>
+                                    </vg-controls>
+                                </videogular>
+
+                            </div>
 							<div layout="column" flex="20">
 								<md-slider ng-change="ratingChanged(song)" flex class="md-warn" md-discrete
 										   ng-model="song.score" step="1" min="1" max="100" aria-label="rating">
