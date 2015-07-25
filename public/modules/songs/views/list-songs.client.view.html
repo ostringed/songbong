@@ -32,44 +32,43 @@
 			<md-list>
 				<md-list-item class="md-3-line" ng-repeat="song in songs | orderBy :'-score' track by $index">
 
-					<div style="padding-left: 40px;padding-right: 40px;" class="md-list-item-text">
-						<h3>{{song.name}}</h3>
-						<p>{{song.link}}</p>
+					<div style="padding-left: 7px;padding-right: 40px;" class="md-list-item-text">
+
 
 						<div layout="row">
-                            <div layout="column" flex="79">
+							<div layout="column" flex="5">
 
-                                <div class="videogular-container" ng-if="$index == 0">
-                                    <videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
-                                        <vg-media vg-src="controller.config.sources"
-                                                  vg-tracks="controller.config.tracks"  vg-type="audio">
-                                        </vg-media>
+								<div class="videogular-container" ng-if="$index == 0">
+									<videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
+										<vg-media vg-src="controller.config.sources"
+												  vg-tracks="controller.config.tracks"  vg-type="audio">
+										</vg-media>
 
-                                        <vg-controls>
-                                            <vg-play-pause-button></vg-play-pause-button>
-                                            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-                                            <vg-scrub-bar>
-                                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                            </vg-scrub-bar>
-                                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                                            <vg-volume>
-                                                <vg-mute-button></vg-mute-button>
-                                                <!--<vg-volume-bar></vg-volume-bar>-->
-                                            </vg-volume>
-                                            <!--<vg-fullscreen-button></vg-fullscreen-button>-->
-                                        </vg-controls>
+										<vg-controls>
+											<vg-play-pause-button></vg-play-pause-button>
 
-                                        <div>
-                                            {{controller.config.sources}}
-                                        </div>
-                                        <!--<vg-overlay-play></vg-overlay-play>-->
-                                        <!--<vg-buffering></vg-buffering>-->
-                                        <!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
-                                    </videogular>
-                                </div>
+											<!--<vg-volume>-->
+											<!--<vg-mute-button></vg-mute-button>-->
+											<!--&lt;!&ndash;<vg-volume-bar></vg-volume-bar>&ndash;&gt;-->
+											<!--</vg-volume>-->
+										</vg-controls>
+										<!--<vg-overlay-play></vg-overlay-play>-->
+										<!--<vg-buffering></vg-buffering>-->
+										<!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
+									</videogular>
+								</div>
 
-                            </div>
+							</div>
+							<div layout="column" flex="30" style="padding-left: 20px;">
+								<h3>{{song.name}}</h3>
+								<p>{{song.link}}</p>
+							</div>
+
+							<div layout="column" flex="19">
+
+							</div>
 							<div layout="column" flex="20">
+								<h3>Rating</h3>
 								<md-slider ng-change="ratingChanged(song)" flex class="md-warn" md-discrete
 										   ng-model="song.score" step="1" min="1" max="100" aria-label="rating">
 								</md-slider>

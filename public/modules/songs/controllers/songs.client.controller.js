@@ -156,7 +156,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
                     autoPlay: false,
                     sources: controller.videos[0].sources,
                     theme: {
-                        url: "http://www.videogular.com/styles/themes/default/latest/videogular.css"
+                        url: "lib/videogular-themes-default/videogular.css"
                     },
                     plugins: {
                         poster: "http://www.videogular.com/assets/images/videogular.png"
