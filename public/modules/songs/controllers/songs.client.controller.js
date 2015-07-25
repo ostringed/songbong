@@ -10,7 +10,8 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 			// Create new Song object
 			var song = new Songs ({
 				name: this.name,
-                link: this.link
+                link: this.link,
+				score:50
 			});
 
 			// Redirect after save
@@ -51,7 +52,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 			var song = $scope.song;
 
 			song.$update(function() {
-				$location.path('songs/' + song._id);
+				//$location.path('songs/' + song._id);
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -93,6 +94,11 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 					});
 			},300);
 			return debounceFn;
+		}
+
+		$scope.ratingChanged=function(song){
+			$scope.song=song
+			$scope.update()
 		}
 
 	}
