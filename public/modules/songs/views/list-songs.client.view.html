@@ -33,11 +33,14 @@
 				<md-list-item class="md-3-line" ng-repeat="song in songs track by $index">
 
 					<div style="padding-left: 40px;padding-right: 40px;" class="md-list-item-text">
-						<h3>{{song.name}}</h3>
-						<p>{{song.link}}</p>
+
 
 						<div layout="row">
-                            <div layout="column" flex="79">
+							<div layout="column" flex="30">
+								<h3>{{song.name}}</h3>
+								<p>{{song.link}}</p>
+							</div>
+                            <div layout="column" flex="49">
 
                                 <div class="videogular-container" ng-if="$index == 0">
                                     <videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
@@ -58,11 +61,7 @@
                                             </vg-volume>
                                             <!--<vg-fullscreen-button></vg-fullscreen-button>-->
                                         </vg-controls>
-
-                                        <div>
-                                            {{controller.config.sources}}
-                                        </div>
-                                        <!--<vg-overlay-play></vg-overlay-play>-->
+									<!--<vg-overlay-play></vg-overlay-play>-->
                                         <!--<vg-buffering></vg-buffering>-->
                                         <!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
                                     </videogular>
