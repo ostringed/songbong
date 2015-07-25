@@ -30,7 +30,7 @@
 	<div>
 		<md-content class="md-default-theme" ng-click="toggleRight()" data-ng-init="find()">
 			<md-list>
-				<md-list-item class="md-3-line" ng-repeat="song in songs track by $index">
+				<md-list-item class="md-3-line" ng-repeat="song in songs | orderBy :'-score' track by $index">
 
 					<div style="padding-left: 7px;padding-right: 40px;" class="md-list-item-text">
 

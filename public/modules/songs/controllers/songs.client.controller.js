@@ -1,8 +1,8 @@
 'use strict';
 
 // Songs controller
-angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil', "$timeout",
-    function($scope, $stateParams, $location, Authentication, Songs, $sce, $mdSidenav, $mdUtil, $timeout) {
+angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil', '$timeout', '$filter',
+    function($scope, $stateParams, $location, Authentication, Songs, $sce, $mdSidenav, $mdUtil, $timeout, $filter) {
         $scope.authentication = Authentication;
 
         /*this.config = {
@@ -129,6 +129,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
         // Find a list of Songs
         $scope.find = function() {
+
             $scope.songs = Songs.query(function(data){
 
                 console.log(data);
@@ -163,7 +164,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
                 };
             });
 
-
+//            $scope.songs = $filter('orderBy')($scope.songs, 'score');
 
         };
 
