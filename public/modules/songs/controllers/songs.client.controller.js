@@ -1,8 +1,8 @@
 'use strict';
 
 // Songs controller
-angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil', '$timeout', '$filter',
-    function($scope, $stateParams, $location, Authentication, Songs, $sce, $mdSidenav, $mdUtil, $timeout, $filter) {
+angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil', '$timeout', '$filter','$interval',
+    function($scope, $stateParams, $location, Authentication, Songs, $sce, $mdSidenav, $mdUtil, $timeout, $filter,$interval) {
         $scope.authentication = Authentication;
 
         /*this.config = {
@@ -129,7 +129,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
         // Find a list of Songs
         $scope.find = function() {
-
+			console.log("Refreshing list")
             $scope.songs = Songs.query(function(data){
 
                 console.log(data);
@@ -204,6 +204,22 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
             $scope.song=song
             $scope.update()
         }
+
+		$interval(function(){
+			Songs.query(function(nextSongs){
+				nextSongs.forEach(function(song){
+					if($scope.songs){
+						$scope.songs.forEach(function(oldSong){
+							if(song._id==oldSong._id){
+								oldSong.score = song.score
+							}
+						})
+					}
+
+				})
+			})
+
+		},5000)
 
     }
 ]);

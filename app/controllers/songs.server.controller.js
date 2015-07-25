@@ -72,8 +72,8 @@ exports.delete = function(req, res) {
 /**
  * List of Songs
  */
-exports.list = function(req, res) { 
-	Song.find().sort('-created').populate('user', 'displayName').exec(function(err, songs) {
+exports.list = function(req, res) {
+	Song.find().sort('-score').populate('user', 'displayName').exec(function(err, songs) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
@@ -87,7 +87,7 @@ exports.list = function(req, res) {
 /**
  * Song middleware
  */
-exports.songByID = function(req, res, next, id) { 
+exports.songByID = function(req, res, next, id) {
 	Song.findById(id).populate('user', 'displayName').exec(function(err, song) {
 		if (err) return next(err);
 		if (! song) return next(new Error('Failed to load Song ' + id));
