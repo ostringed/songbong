@@ -25,6 +25,8 @@
 
 		</md-content>
 	</md-sidenav>
+
+
 	<div>
 		<md-content class="md-default-theme" ng-click="toggleRight()" data-ng-init="find()">
 			<md-list>
@@ -37,21 +39,34 @@
 						<div layout="row">
                             <div layout="column" flex="79">
 
-                                <videogular ng-if="$index == 0" vg-theme="controller.config.theme.url" class="videogular-container audio">
-                                    <vg-media vg-src="controller.config.sources" vg-type="audio"></vg-media>
+                                <div class="videogular-container" ng-if="$index == 0">
+                                    <videogular vg-player-ready="controller.onPlayerReady($API)" vg-complete="controller.onCompleteVideo()" vg-theme="controller.config.theme.url" class="videogular-container audio">
+                                        <vg-media vg-src="controller.config.sources"
+                                                  vg-tracks="controller.config.tracks"  vg-type="audio">
+                                        </vg-media>
 
-                                    <vg-controls>
-                                        <vg-play-pause-button></vg-play-pause-button>
-                                        <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
-                                        <vg-scrub-bar>
-                                            <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
-                                        </vg-scrub-bar>
-                                        <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
-                                        <vg-volume>
-                                            <vg-mute-button></vg-mute-button>
-                                        </vg-volume>
-                                    </vg-controls>
-                                </videogular>
+                                        <vg-controls>
+                                            <vg-play-pause-button></vg-play-pause-button>
+                                            <vg-time-display>{{ currentTime | date:'mm:ss' }}</vg-time-display>
+                                            <vg-scrub-bar>
+                                                <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+                                            </vg-scrub-bar>
+                                            <vg-time-display>{{ timeLeft | date:'mm:ss' }}</vg-time-display>
+                                            <vg-volume>
+                                                <vg-mute-button></vg-mute-button>
+                                                <!--<vg-volume-bar></vg-volume-bar>-->
+                                            </vg-volume>
+                                            <!--<vg-fullscreen-button></vg-fullscreen-button>-->
+                                        </vg-controls>
+
+                                        <div>
+                                            {{controller.config.sources}}
+                                        </div>
+                                        <!--<vg-overlay-play></vg-overlay-play>-->
+                                        <!--<vg-buffering></vg-buffering>-->
+                                        <!--<vg-poster vg-url='controller.config.plugins.poster'></vg-poster>-->
+                                    </videogular>
+                                </div>
 
                             </div>
 							<div layout="column" flex="20">
