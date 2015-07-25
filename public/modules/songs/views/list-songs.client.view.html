@@ -1,22 +1,50 @@
-<section data-ng-controller="SongsController" data-ng-init="find()">
-    <div class="page-header">
-        <h1>Songs</h1>
-    </div>
-    <div class="list-group">
-        <a data-ng-repeat="song in songs" data-ng-href="#!/songs/{{song._id}}" class="list-group-item">
-			<small class="list-group-item-text">
-				Posted on
-				<span data-ng-bind="song.created | date:'medium'"></span>
-				by
-				<span data-ng-bind="song.user.displayName"></span>
-			</small>
-			<!--<h4 class="list-group-item-heading" data-ng-bind="song.name"></h4>-->
-            <audio controls ng-init="sanitizeURL(song.link)">
-                <source data-ng-src="{{sanitizedURL}}" type="audio/mpeg">
-            </audio>
-        </a>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!songs.$resolved || songs.length">
-    	No Songs yet, why don't you <a href="/#!/songs/create">create one</a>?
-    </div>
-</section>
+<div  style="padding-left: 40px;padding-right: 40px;">
+	<md-sidenav class="md-sidenav-right md-whiteframe-z2" md-component-id="right">
+		<md-toolbar class="md-theme-light">
+			<h1 class="md-toolbar-tools">Add Song</h1>
+		</md-toolbar>
+		<md-content layout-padding>
+			<div data-ng-show="error" class="text-danger">
+				<strong data-ng-bind="error"></strong>
+			</div>
+			<form  novalidate ng-submit="create()">
+				<md-input-container>
+					<label for="testInput">Name</label>
+					<input required="" type="text" id="testInput"
+						   ng-model="name" md-sidenav-focus>
+				</md-input-container>
+				<md-input-container>
+					<label for="testInput">URL</label>
+					<input required="" type="text" id="link"
+						   ng-model="link">
+				</md-input-container>
+				<md-button type="submit"   class="md-primary md-raised">
+					Save
+				</md-button>
+			</form>
+
+		</md-content>
+	</md-sidenav>
+	<div>
+		<md-content class="md-default-theme" ng-click="toggleRight()" data-ng-init="find()">
+			<md-list style="width: 100%">
+				<md-list-item class="md-3-line"  style="padding: 10px 0px;"  ng-repeat="song in songs">
+
+					<div class="md-list-item-text">
+						<h3>{{song.name}}</h3>
+						<p>{{song.link}}</p>
+						<md-slider style="padding-left: 20px;padding-right:20px;" flex class="md-warn" md-discrete ng-model="song.rating" step="1" min="1" max="100" aria-label="rating">
+						</md-slider>
+					</div>
+					<md-divider></md-divider>
+				</md-list-item>
+			</md-list>
+
+		</md-content>
+	</div>
+
+</div>
+
+
+
+

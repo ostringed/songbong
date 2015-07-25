@@ -1,8 +1,8 @@
 'use strict';
 
 // Songs controller
-angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Songs', '$sce',
-	function($scope, $stateParams, $location, Authentication, Songs, $sce) {
+angular.module('songs').controller('SongsController', ['$scope', '$stateParams', '$location' ,'Authentication', 'Songs', '$sce','$mdSidenav','$mdUtil',
+	function($scope, $stateParams, $location, Authentication, Songs, $sce,$mdSidenav,$mdUtil) {
 		$scope.authentication = Authentication;
 
 		// Create new Song
@@ -15,7 +15,11 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
 			// Redirect after save
 			song.$save(function(response) {
-				$location.path('songs');
+				if($scope.songs && $scope.songs.length>0){
+					$scope.songs.push(song)
+				}else{
+					$scope.songs=[song]
+				}
 
 				// Clear form fields
 //				$scope.name = '';
@@ -26,7 +30,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
 		// Remove existing Song
 		$scope.remove = function(song) {
-			if ( song ) { 
+			if ( song ) {
 				song.$remove();
 
 				for (var i in $scope.songs) {
@@ -59,7 +63,7 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
 
 		// Find existing Song
         $scope.findOne = function() {
-			$scope.song = Songs.get({ 
+			$scope.song = Songs.get({
 				songId: $stateParams.songId
 			});
 		};
@@ -67,5 +71,28 @@ angular.module('songs').controller('SongsController', ['$scope', '$stateParams',
         $scope.sanitizeURL = function(htmlCode){
             $scope.sanitizedURL = $sce.trustAsResourceUrl(htmlCode);
         }
+
+			$scope.close = function () {
+				$mdSidenav('right').close()
+					.then(function () {
+						console.debug("close RIGHT is done");
+					});
+			};
+		$scope.toggleRight = buildToggler('right');
+		/**
+		 * Build handler to open/close a SideNav; when animation finishes
+		 * report completion in console
+		 */
+		function buildToggler(navID) {
+			var debounceFn =  $mdUtil.debounce(function(){
+				$mdSidenav(navID)
+					.toggle()
+					.then(function () {
+						console.log("toggle " + navID + " is done");
+					});
+			},300);
+			return debounceFn;
+		}
+
 	}
 ]);

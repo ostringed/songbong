@@ -7,7 +7,8 @@ angular.module('songs').config(['$stateProvider',
 		$stateProvider.
 		state('listSongs', {
 			url: '/songs',
-			templateUrl: 'modules/songs/views/list-songs.client.view.html'
+			templateUrl: 'modules/songs/views/list-songs.client.view.html',
+				controller:'SongsController'
 		}).
 		state('createSong', {
 			url: '/songs/create',
